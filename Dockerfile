@@ -1,0 +1,36 @@
+#****************************************************************************
+# A Sherpa Dockerfile. From an example by Andrew Odewahn (@odewahn)
+#
+#  - https://github.com/DougBurke/sherpa-standalone-notebooks
+#  - https://github.com/sherpa/sherpa
+#  - https://hub.docker.com/r/continuumio/miniconda/
+#
+#****************************************************************************
+FROM continuumio/miniconda
+
+MAINTAINER Omar Laurino <olaurino@cfa.harvard.edu>
+
+#****************************************************************************
+# Install required conda libraries
+#****************************************************************************
+
+RUN conda install -c sherpa -y \
+  jupyter matplotlib astropy scipy sherpa=4.8 && conda clean -tipsy
+
+# Expose the notebook port
+EXPOSE 8888
+
+# Add notebooks to image
+ADD . /data
+
+# Set working dir
+WORKDIR /data
+
+# Mount conda environments folder as volume for persistence
+VOLUME /opt/conda/envs
+
+#****************************************************************************
+# Fire it up
+#****************************************************************************
+CMD jupyter notebook --no-browser --port 8888 --ip=*
+
