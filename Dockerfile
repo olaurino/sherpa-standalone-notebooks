@@ -15,7 +15,10 @@ MAINTAINER Omar Laurino <olaurino@cfa.harvard.edu>
 #****************************************************************************
 
 RUN conda install -c sherpa -y \
-  jupyter matplotlib astropy scipy sherpa=4.8 && conda clean -tipsy
+  ipython-notebook matplotlib astropy scipy sherpa=4.8 nomkl && \
+  conda remove -y --force qt pyqt qtconsole && \ 
+  conda clean -tipsy && \
+  rm -rf /opt/conda/pkgs/*
 
 # Expose the notebook port
 EXPOSE 8888
@@ -32,5 +35,5 @@ VOLUME /opt/conda/envs
 #****************************************************************************
 # Fire it up
 #****************************************************************************
-CMD jupyter notebook --no-browser --port 8888 --ip=*
+CMD ipython notebook --no-browser --port 8888 --ip=*
 
