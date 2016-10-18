@@ -14,6 +14,8 @@ MAINTAINER Omar Laurino <olaurino@cfa.harvard.edu>
 # Install required conda libraries
 #****************************************************************************
 
+RUN source activate python3
+
 RUN conda install -c sherpa -y \
   ipython-notebook matplotlib astropy scipy sherpa=4.8 nomkl && \
   conda remove -y --force qt pyqt qtconsole && \ 
