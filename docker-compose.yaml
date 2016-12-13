@@ -1,0 +1,20 @@
+httpproxy:
+   image: jupyter/configurable-http-proxy
+   environment:
+     CONFIGPROXY_AUTH_TOKEN: 716238957362948752139417321
+   container_name:  tmpnb-proxy
+   net: "host"
+   command: --default-target http://127.0.0.1:9999
+   ports:
+     - 8000:8000
+
+tmpnb_orchestrate:
+   image: jupyter/tmpnb
+   net: "host"
+   container_name: tmpnb_orchestrate
+   environment:
+     CONFIGPROXY_AUTH_TOKEN: 716238957362948752139417321
+   volumes:
+     - /var/run/docker.sock:/docker.sock
+   command: python orchestrate.py --image='olaurino/sherpa-standalone-notebooks' --cpu-quota=50000 --cull-max=28800 --pool-size=15 --user-length=3
+       --command="jupyter notebook --NotebookApp.base_url={base_path} --ip=0.0.0.0 --port {port}"
