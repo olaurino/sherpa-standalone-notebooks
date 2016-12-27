@@ -32,6 +32,9 @@ WORKDIR /data
 # Mount conda environments folder as volume for persistence
 VOLUME /opt/conda/envs
 
+# Single CPU Configuration file
+ENV SHERPARC=/data/sherparc
+
 #****************************************************************************
 # Fire it up
 #****************************************************************************
