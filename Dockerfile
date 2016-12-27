@@ -6,7 +6,7 @@
 #  - https://hub.docker.com/r/continuumio/miniconda/
 #
 #****************************************************************************
-FROM continuumio/miniconda
+FROM continuumio/miniconda3
 
 MAINTAINER Omar Laurino <olaurino@cfa.harvard.edu>
 
@@ -14,8 +14,8 @@ MAINTAINER Omar Laurino <olaurino@cfa.harvard.edu>
 # Install required conda libraries
 #****************************************************************************
 
-RUN conda install -n python3 -c sherpa -y \
-  ipython-notebook matplotlib astropy scipy sherpa=4.8 nomkl && \
+RUN conda install -c sherpa -y \
+  notebook=4.2.3 matplotlib astropy scipy sherpa=4.8 nomkl && \
   conda remove -y --force qt pyqt qtconsole && \ 
   conda clean -tipsy && \
   rm -rf /opt/conda/pkgs/*
