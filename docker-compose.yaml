@@ -16,5 +16,5 @@ tmpnb_orchestrate:
      CONFIGPROXY_AUTH_TOKEN: 716238957362948752139417321
    volumes:
      - /var/run/docker.sock:/docker.sock
-   command: python orchestrate.py --image='olaurino/sherpa-standalone-notebooks' --cpu-quota=50000 --cull-max=288000 --pool-size=10 --mem-limit=1024m
+   command: python orchestrate.py --image='sherpadev/sherpa' --cpu-quota=50000 --cull-max=288000 --pool-size=10 --mem-limit=1024m
        --command="jupyter notebook --NotebookApp.base_url={base_path} --ip=0.0.0.0 --port {port}"
