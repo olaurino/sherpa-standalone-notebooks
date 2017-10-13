@@ -29,7 +29,7 @@ RUN apk add --no-cache --virtual=build-deps --update-cache wget \
 #****************************************************************************
 
 RUN conda install -y -c sherpa \
-  notebook=4.2.3 matplotlib astropy=1.3 scipy sherpa=4.8 nomkl && \
+  notebook=4.2.3 matplotlib astropy=1.3 scipy sherpa=4.9.1 nomkl && \
   conda remove -y --force qt pyqt qtconsole && \ 
   conda clean -tipsy && \
   rm -rf /opt/conda/pkgs/* && \
